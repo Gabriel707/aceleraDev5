@@ -1,5 +1,6 @@
 package br.com.aceleradev5.controllers;
 
+import br.com.aceleradev5.dtos.ErrorDTO;
 import br.com.aceleradev5.dtos.ImportacaoPlanilhaDTO;
 import br.com.aceleradev5.dtos.RelatorioVendasPorClienteDTO;
 import br.com.aceleradev5.dtos.RelatorioVendasPorMesDTO;
@@ -27,9 +28,9 @@ public class VendaController {
             ImportacaoPlanilhaDTO importacaoPlanilhaDTO = vendaService.importarPlanilhaVendas(planilhaVendas);
             return ResponseEntity.ok(importacaoPlanilhaDTO);
         } catch (ProdutoNotFoundException | ClienteNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body((new ErrorDTO(e.getMessage(), HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase())));
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body((new ErrorDTO(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())));
         }
     }
 
@@ -39,9 +40,9 @@ public class VendaController {
             RelatorioVendasPorMesDTO relatorioVendasPorMesDTO = vendaService.gerarRelatorioVendasPorMes(mes);
             return ResponseEntity.ok(relatorioVendasPorMesDTO);
         } catch (VendaNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body((new ErrorDTO(e.getMessage(), HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase())));
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body((new ErrorDTO(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())));
         }
     }
 
@@ -51,9 +52,9 @@ public class VendaController {
             RelatorioVendasPorClienteDTO relatorioVendasPorClienteDTO = vendaService.gerarRelatorioPorCpfCliente(cpf);
             return ResponseEntity.ok(relatorioVendasPorClienteDTO);
         } catch (ClienteNotFoundException | CepNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body((new ErrorDTO(e.getMessage(), HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase())));
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body((new ErrorDTO(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())));
         }
     }
 }

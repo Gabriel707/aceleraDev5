@@ -1,5 +1,6 @@
 package br.com.aceleradev5.controllers;
 
+import br.com.aceleradev5.dtos.ErrorDTO;
 import br.com.aceleradev5.dtos.ProdutoDTO;
 import br.com.aceleradev5.exceptions.produto.ProdutoException;
 import br.com.aceleradev5.exceptions.produto.ProdutoNotFoundException;
@@ -34,7 +35,7 @@ public class ProdutoController {
 
             return ResponseEntity.created(uri).body(response);
         } catch (ProdutoException e) {
-            return ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body((new ErrorDTO(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())));
         }
     }
 
@@ -45,9 +46,9 @@ public class ProdutoController {
             ProdutoDTO response = service.atualizarProduto(id, produtoDTO);
             return ResponseEntity.ok(response);
         } catch (ProdutoNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body((new ErrorDTO(e.getMessage(), HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase())));
         } catch (ProdutoException e) {
-            return ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body((new ErrorDTO(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())));
         }
     }
 
@@ -57,7 +58,7 @@ public class ProdutoController {
             ProdutoDTO response = service.consultarProdutoPorId(id);
             return ResponseEntity.ok(response);
         } catch (ProdutoNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body((new ErrorDTO(e.getMessage(), HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase())));
         }
 
     }
@@ -74,7 +75,7 @@ public class ProdutoController {
             service.excluirProdutoPorId(id);
             return ResponseEntity.ok().build();
         } catch (ProdutoNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body((new ErrorDTO(e.getMessage(), HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase())));
         }
     }
 

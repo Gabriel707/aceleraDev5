@@ -1,6 +1,7 @@
 package br.com.aceleradev5.controllers;
 
 import br.com.aceleradev5.dtos.ClienteDTO;
+import br.com.aceleradev5.dtos.ErrorDTO;
 import br.com.aceleradev5.exceptions.cliente.ClienteException;
 import br.com.aceleradev5.exceptions.cliente.ClienteNotFoundException;
 import br.com.aceleradev5.services.ClienteService;
@@ -34,7 +35,7 @@ public class ClienteController {
 
             return ResponseEntity.created(uri).body(response);
         } catch (ClienteException e) {
-            return ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body(new ErrorDTO(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()));
         }
     }
 
@@ -45,9 +46,9 @@ public class ClienteController {
             ClienteDTO response = service.atualizarCliente(id, clienteDTO);
             return ResponseEntity.ok(response);
         } catch (ClienteNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body((new ErrorDTO(e.getMessage(), HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase())));
         } catch (ClienteException e) {
-            return ResponseEntity.internalServerError().body(e.getMessage());
+            return ResponseEntity.internalServerError().body((new ErrorDTO(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())));
         }
     }
 
@@ -57,7 +58,7 @@ public class ClienteController {
             ClienteDTO response = service.consultarClientePorId(id);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body((new ErrorDTO(e.getMessage(), HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase())));
         }
 
     }
@@ -74,7 +75,7 @@ public class ClienteController {
             service.excluirClientePorId(id);
             return ResponseEntity.ok().build();
         } catch (ClienteNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body((new ErrorDTO(e.getMessage(), HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase())));
         }
     }
 
