@@ -14,9 +14,11 @@ public class Produto {
     private Integer id;
 
     @Column(name = "codigo_produto", nullable = false, unique = true)
-    private String codigo;
+    private Long codigo;
+
     @Column(name = "nome_produto", nullable = false)
     private String nome;
+
     @Column(name = "preco_produto", nullable = false)
     private BigDecimal preco;
 
@@ -31,11 +33,11 @@ public class Produto {
         this.id = id;
     }
 
-    public String getCodigo() {
+    public Long getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(Long codigo) {
         this.codigo = codigo;
     }
 

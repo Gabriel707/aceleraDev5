@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
+
+    boolean existsProdutoByCodigo(Long codigo);
+
+    Produto searchProdutoByCodigo(Long codigo);
 }

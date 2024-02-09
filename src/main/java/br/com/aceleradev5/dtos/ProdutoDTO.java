@@ -1,5 +1,9 @@
 package br.com.aceleradev5.dtos;
 
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -7,11 +11,24 @@ public class ProdutoDTO {
 
     private Integer id;
 
-    private String codigo;
+    @NotNull(message = "O campo 'codigo' é obrigatório")
+    private Long codigo;
+
+    @NotNull(message = "O campo 'nome' é obrigatório")
+    @NotBlank(message = "O campo 'nome' é obrigatório")
     private String nome;
+
+    @NotNull(message = "O campo 'preco' é obrigatório")
+    @DecimalMin(value = "0", inclusive = false, message = "O campo 'preco' deve ser maior que zero")
     private BigDecimal preco;
 
     public ProdutoDTO() {
+    }
+
+    public ProdutoDTO(Long codigo, String nome, BigDecimal preco) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.preco = preco;
     }
 
     public Integer getId() {
@@ -22,11 +39,11 @@ public class ProdutoDTO {
         this.id = id;
     }
 
-    public String getCodigo() {
+    public Long getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(Long codigo) {
         this.codigo = codigo;
     }
 

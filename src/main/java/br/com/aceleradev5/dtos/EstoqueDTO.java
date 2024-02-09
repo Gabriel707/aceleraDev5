@@ -1,5 +1,8 @@
 package br.com.aceleradev5.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -7,11 +10,19 @@ public class EstoqueDTO {
 
     private Integer id;
 
+    @NotNull(message = "O campo 'qtdDisponivel' é obrigatório")
     private Integer qtdDisponivel;
 
+    @NotNull(message = "O campo 'dataEstoque' é obrigatório")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
     private LocalDate dataEstoque;
 
     private ProdutoDTO produto;
+
+    public EstoqueDTO(Integer qtdDisponivel, LocalDate dataEstoque) {
+        this.qtdDisponivel = qtdDisponivel;
+        this.dataEstoque = dataEstoque;
+    }
 
     public EstoqueDTO() {
     }

@@ -13,13 +13,15 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-
     @Column(name = "nome", nullable = false)
     private String nome;
+
     @Column(name = "cpf", nullable = false, unique = true)
     private String cpf;
+
     @Column(name = "cep", nullable = false)
     private String cep;
+
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
 

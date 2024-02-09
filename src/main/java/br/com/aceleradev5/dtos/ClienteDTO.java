@@ -1,5 +1,9 @@
 package br.com.aceleradev5.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -7,9 +11,20 @@ public class ClienteDTO {
 
     private Integer id;
 
+    @NotNull(message = "O campo 'nome' é obrigatório")
+    @NotBlank(message = "O campo 'nome' é obrigatório")
     private String nome;
+
+    @NotNull(message = "O campo 'cpf' é obrigatório")
+    @NotBlank(message = "O campo 'cpf' é obrigatório")
     private String cpf;
+
+    @NotNull(message = "O campo 'cep' é obrigatório")
+    @NotBlank(message = "O campo 'cep' é obrigatório")
     private String cep;
+
+    @NotNull(message = "O campo 'dataNascimento' é obrigatório")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
     private LocalDate dataNascimento;
 
     public ClienteDTO() {

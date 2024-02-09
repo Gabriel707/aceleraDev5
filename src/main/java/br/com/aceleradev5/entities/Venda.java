@@ -12,18 +12,38 @@ public class Venda {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     @ManyToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private Cliente cliente;
+
     @ManyToOne
     @JoinColumn(name = "produto_id", referencedColumnName = "id")
     private Produto produto;
+
     @Column(name = "quantidade_produtos_comprados", nullable = false)
     private Integer qtdProdutosComprados;
+
     @Column(name = "data_da_venda", nullable = false)
     private LocalDate dataDaVenda;
 
     public Venda() {
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 
     public Integer getQtdProdutosComprados() {
