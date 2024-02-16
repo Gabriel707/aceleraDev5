@@ -16,8 +16,9 @@ Ao subir a aplicação, siga os passos a seguir:
 
 2. Verificar no arquivo application.properties por login e senha:
 
-**username=sa
-password=password**
+**username=sa**
+
+**password=password**
 
 
 
