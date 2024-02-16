@@ -5,9 +5,7 @@ Após clonar o projeto, verifique se todas as dependencias estarão instaladas.
 No terminal caso tenha problemas, verifique a instalação do maven e possiveis problemas de dependencias
 
 **
-
 $ mvn clean install
-
 **
 
 O comando acima pode ajudar.
