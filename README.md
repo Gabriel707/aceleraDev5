@@ -14,7 +14,7 @@ Ao subir a aplicação, siga os passos a seguir:
 
 **http://localhost:8080/h2-console/**
 
-Verificar no arquivo application.properties por login e senha:
+2. Verificar no arquivo application.properties por login e senha:
 
 **username=sa
 spring.datasource.password=password**
@@ -29,3 +29,11 @@ Endpoints:
 
 **http://localhost:8080/estoques/2/produtos**
 
+
+**OBS: Vale lembrar que a aplicação está rodando com banco em memória, ou seja, qualquer queda no sistema, os dados – volateis – serão perdidos, e uma nova repopulação deverá ser feita no banco de dados.**
+
+Output esperado ao importar a planilha:
+
+{
+    "mensagemProcessamento": "Planilha de vendas importada com sucesso"
+}
